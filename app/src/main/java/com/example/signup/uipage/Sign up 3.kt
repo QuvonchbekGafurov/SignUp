@@ -48,7 +48,7 @@ import com.example.signup.ui.theme.maincolor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpStep3(onNext: () -> Unit) {
+fun SignUpStep3(onNext: () -> Unit, onBack: () -> Unit) {
     var password by rememberSaveable { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     Box(modifier = Modifier.fillMaxSize())
@@ -68,7 +68,9 @@ fun SignUpStep3(onNext: () -> Unit) {
                 Image(
                     painter = painterResource(id = R.drawable.back),
                     contentDescription = "",
-                    modifier = Modifier.size(25.dp)
+                    modifier = Modifier.size(25.dp).clickable {
+                        onBack()
+                    }
                 )
 
                 // Oraliqni to'ldirish uchun Spacer
@@ -86,7 +88,12 @@ fun SignUpStep3(onNext: () -> Unit) {
                 Spacer(modifier = Modifier.weight(1f))
             }
             Spacer(modifier = Modifier.padding(top = 20.dp))
-            Text(text = "Create a Password", color = Color.Black, fontSize = 30.sp, modifier = Modifier.padding(start = 10.dp))
+            Text(
+                text = "Create a Password",
+                color = Color.Black,
+                fontSize = 30.sp,
+                modifier = Modifier.padding(start = 10.dp)
+            )
 
             TextField(
                 value = password,
@@ -101,19 +108,37 @@ fun SignUpStep3(onNext: () -> Unit) {
 
                 textStyle = TextStyle(color = Color.Black, fontSize = 25.sp),
                 maxLines = 1,
-                placeholder = { Text("Password", fontSize = 25.sp, color = Color.LightGray) }, // Hint matni qo'shilmoqda
+                placeholder = {
+                    Text(
+                        "Password",
+                        fontSize = 25.sp,
+                        color = Color.LightGray
+                    )
+                }, // Hint matni qo'shilmoqda
                 modifier = Modifier
                     .fillMaxWidth()
 
             )
-            Row (modifier = Modifier.fillMaxWidth().padding(start = 12.dp), verticalAlignment = Alignment.CenterVertically){
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Box(
                     modifier = Modifier
                         .size(18.dp) // Aylana o'lchami
-                        .background(color = if (passwordVisible) maincolor else Color.White, shape = CircleShape) // Ichki rangi ko'k
-                        .border(width = 2.dp, color =if (passwordVisible) maincolor else Color.LightGray, shape = CircleShape) // Chegara rangi qizil
+                        .background(
+                            color = if (passwordVisible) maincolor else Color.White,
+                            shape = CircleShape
+                        ) // Ichki rangi ko'k
+                        .border(
+                            width = 2.dp,
+                            color = if (passwordVisible) maincolor else Color.LightGray,
+                            shape = CircleShape
+                        ) // Chegara rangi qizil
                         .clickable {
-                            passwordVisible=!passwordVisible
+                            passwordVisible = !passwordVisible
                         }
                 )
                 Spacer(modifier = Modifier.padding(start = 10.dp))
@@ -122,13 +147,15 @@ fun SignUpStep3(onNext: () -> Unit) {
 
 
         }
-        Column(modifier = Modifier
-            .fillMaxWidth()
-            .align(Alignment.BottomCenter)
-            .padding(16.dp)
-            .imePadding(), Arrangement.Bottom) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .padding(16.dp)
+                .imePadding(), Arrangement.Bottom
+        ) {
             Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "2 of 3", modifier = Modifier.align(Alignment.End), fontSize = 15.sp,)
+            Text(text = "2 of 3", modifier = Modifier.align(Alignment.End), fontSize = 15.sp)
             Spacer(modifier = Modifier.height(6.dp))
 
             Row(
@@ -166,13 +193,14 @@ fun SignUpStep3(onNext: () -> Unit) {
         }
     }
     Spacer(modifier = Modifier.padding(bottom = 8.dp))
-
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun showSingUp3(){
-    SignUpStep3 {
+fun showSingUp3() {
+    SignUpStep3(onNext = {
         println("")
-    }
+    },
+        onBack = {}
+    )
 }

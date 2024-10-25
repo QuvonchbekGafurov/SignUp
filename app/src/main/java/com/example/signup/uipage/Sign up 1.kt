@@ -3,6 +3,7 @@ package com.example.signup.uipage
 import android.graphics.MaskFilter
 import android.text.style.MaskFilterSpan
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -54,7 +55,7 @@ import com.example.signup.ui.theme.DarkGreen
 import com.example.signup.ui.theme.maincolor
 
 @Composable
-fun SignUpStep1(onNext: () -> Unit) {
+fun SignUpStep1(onNext: () -> Unit, onBack: () -> Unit) {
     var Name by remember { mutableStateOf("") }
     var adress by remember { mutableStateOf("") }
     var phonenumber by remember { mutableStateOf("") }
@@ -74,7 +75,9 @@ fun SignUpStep1(onNext: () -> Unit) {
                 Image(
                     painter = painterResource(id = R.drawable.back),
                     contentDescription = "",
-                    modifier = Modifier.size(25.dp),
+                    modifier = Modifier.size(25.dp).clickable {
+                        onBack()
+                    },
                     alignment = Alignment.CenterStart
                 )
             }
@@ -89,8 +92,7 @@ fun SignUpStep1(onNext: () -> Unit) {
                 text = "Fill your information below or register with your social account",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 30.dp)
-                ,
+                    .padding(horizontal = 30.dp),
                 fontSize = 15.sp,// Optional padding for spacing
                 color = Color.LightGray,
                 textAlign = TextAlign.Center // Matnni markazlashtirish
@@ -242,5 +244,11 @@ fun showSignup1() {
     SignUpStep1(onNext = {
         // Bu yerda keyingi sahnaga o'tishni amalga oshirishingiz mumkin
         println("Login tugmasi bosildi!")
-    })
+    },
+        {
+            // Bu yerda keyingi sahnaga o'tishni amalga oshirishingiz mumkin
+            println("Login tugmasi bosildi!")
+        }
+
+    )
 }

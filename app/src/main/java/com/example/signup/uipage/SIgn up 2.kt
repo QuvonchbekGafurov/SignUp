@@ -2,6 +2,7 @@ package com.example.signup.uipage
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,7 +42,7 @@ import com.example.signup.ui.theme.maincolor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpStep2(onNext: () -> Unit) {
+fun SignUpStep2(onNext: () -> Unit,onBack: () -> Unit) {
     var email by remember { mutableStateOf("") }
 
     Box(modifier = Modifier.fillMaxSize())
@@ -61,7 +62,9 @@ fun SignUpStep2(onNext: () -> Unit) {
                 Image(
                     painter = painterResource(id = R.drawable.back),
                     contentDescription = "",
-                    modifier = Modifier.size(25.dp)
+                    modifier = Modifier.size(25.dp).clickable {
+                        onBack()
+                    }
                 )
 
                 // Oraliqni to'ldirish uchun Spacer
@@ -152,5 +155,10 @@ fun SignUpStep2(onNext: () -> Unit) {
 fun showSignUp2() {
     SignUpStep2(onNext = {
         println("Login tugmasi bosildi!")
-    })
+    },
+        onBack = {
+
+        }
+
+    )
 }

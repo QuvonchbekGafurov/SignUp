@@ -16,7 +16,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import org.w3c.dom.Text
 
 @Composable
 fun OtpTextField(
@@ -39,7 +38,7 @@ fun OtpTextField(
                 onOtpTextChange.invoke(it.text, it.text.length == otpCount)
             }
         },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
         decorationBox = {
             Row(horizontalArrangement = Arrangement.Center) {
                 repeat(otpCount) { index ->

@@ -52,7 +52,7 @@ import com.example.signup.ui.theme.maincolor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpStep4(onVerify: () -> Unit) {
+fun SignUpStep4(onBack: () -> Unit) {
     var otpValue by rememberSaveable { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     Box(modifier = Modifier.fillMaxSize())
@@ -72,8 +72,11 @@ fun SignUpStep4(onVerify: () -> Unit) {
                 Image(
                     painter = painterResource(id = R.drawable.back),
                     contentDescription = "",
-                    modifier = Modifier.size(25.dp)
+                    modifier = Modifier.size(25.dp).clickable {
+                        onBack()
+                    }
                 )
+
 
                 // Oraliqni to'ldirish uchun Spacer
                 Spacer(modifier = Modifier.weight(1f))
@@ -146,7 +149,6 @@ fun SignUpStep4(onVerify: () -> Unit) {
                 Text("Log In", color = Color.White) // Matn rangini oq qilib qo'yish
             }
             Spacer(modifier = Modifier.padding(bottom = 8.dp))
-
         }
     }
 }
@@ -154,7 +156,5 @@ fun SignUpStep4(onVerify: () -> Unit) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun showSignUp4(){
-    SignUpStep4 {
-
-    }
+    SignUpStep4(onBack =  {})
 }
