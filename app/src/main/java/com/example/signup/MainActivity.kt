@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SignUpTheme {
-                Box(modifier = Modifier.padding(vertical = 20.dp).navigationBarsPadding() // Navigatsiya paneli ustida joylashtirish
+                Box(modifier = Modifier.navigationBarsPadding() // Navigatsiya paneli ustida joylashtirish
                 )
                 {
                     MainApp()
